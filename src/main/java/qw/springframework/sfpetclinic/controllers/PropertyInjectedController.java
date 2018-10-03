@@ -2,7 +2,7 @@ package qw.springframework.sfpetclinic.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import qw.springframework.sfpetclinic.services.GreetingServiceImpl;
+import qw.springframework.sfpetclinic.services.GreetingService;
 
 /**
  * This is bad example. Do NOT follow this pattern
@@ -10,10 +10,13 @@ import qw.springframework.sfpetclinic.services.GreetingServiceImpl;
 @Controller
 public class PropertyInjectedController {
 
+    // Use reflection to allow Spring to find the bean with property name
+    // But there might be unintended side effects. So be explicit and NOT
+    // use this trick.
     @Autowired
-    public GreetingServiceImpl greetingService;
+    public GreetingService greetingServiceImpl;
 
     public String sayHello() {
-        return greetingService.sayGreeting();
+        return greetingServiceImpl.sayGreeting();
     }
 }
