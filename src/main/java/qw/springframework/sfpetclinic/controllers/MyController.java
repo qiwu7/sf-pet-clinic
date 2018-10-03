@@ -1,10 +1,17 @@
 package qw.springframework.sfpetclinic.controllers;
 
 import org.springframework.stereotype.Controller;
+import qw.springframework.sfpetclinic.services.GreetingService;
 
 @Controller
 public class MyController {
-  public void hello() {
-    System.out.println("Hello World");
-  }
+    private GreetingService greetingService;
+
+    public MyController(GreetingService greetingService) {
+        this.greetingService = greetingService;
+    }
+
+    public String hello() {
+        return greetingService.sayGreeting();
+    }
 }
