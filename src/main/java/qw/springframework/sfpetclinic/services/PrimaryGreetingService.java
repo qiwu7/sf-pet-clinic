@@ -1,17 +1,14 @@
 package qw.springframework.sfpetclinic.services;
 
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
-
-@Service
-@Profile({"en", "default"})
-@Primary
 public class PrimaryGreetingService implements GreetingService {
-    public static final String HELLO_WORLD= "Hello - Primary Greeting service";
+    private GreetingRepository greetingRepository;
+
+    public PrimaryGreetingService(GreetingRepository greetingRepository) {
+        this.greetingRepository = greetingRepository;
+    }
 
     @Override
     public String sayGreeting() {
-        return HELLO_WORLD;
+        return greetingRepository.getEnglishGreeting();
     }
 }
