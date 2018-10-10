@@ -1,0 +1,8 @@
+qw:
+  username: username
+  password: password123
+  dburl: asdfawefafaefs
+  jms:
+    username: jms_user
+    password: password123
+    dburl: some_url
