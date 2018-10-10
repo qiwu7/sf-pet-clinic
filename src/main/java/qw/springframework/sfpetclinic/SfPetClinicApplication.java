@@ -7,6 +7,7 @@ import qw.springframework.sfpetclinic.controllers.ConstructorInjectedController;
 import qw.springframework.sfpetclinic.controllers.MyController;
 import qw.springframework.sfpetclinic.controllers.PropertyInjectedController;
 import qw.springframework.sfpetclinic.controllers.SetterInjectedController;
+import qw.springframework.sfpetclinic.examplebeans.FakeDataSource;
 
 @SpringBootApplication
 public class SfPetClinicApplication {
@@ -15,9 +16,8 @@ public class SfPetClinicApplication {
         ApplicationContext ctx = SpringApplication.run(SfPetClinicApplication.class, args);
         MyController controller = (MyController) ctx.getBean("myController");
 
-        System.out.println(controller.hello());
-        System.out.println(ctx.getBean(PropertyInjectedController.class).sayHello());
-        System.out.println(ctx.getBean(SetterInjectedController.class).sayHello());
-        System.out.println(ctx.getBean(ConstructorInjectedController.class).sayHello());
+        FakeDataSource fakeDataSource = (FakeDataSource) ctx.getBean(FakeDataSource.class);
+
+        System.out.println(fakeDataSource.getUser());
     }
 }
