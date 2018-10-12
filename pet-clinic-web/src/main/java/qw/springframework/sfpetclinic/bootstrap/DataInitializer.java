@@ -4,25 +4,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import qw.springframework.sfpetclinic.model.Owner;
+import qw.springframework.sfpetclinic.model.PetType;
 import qw.springframework.sfpetclinic.model.Vet;
 import qw.springframework.sfpetclinic.services.OwnerService;
+import qw.springframework.sfpetclinic.services.PetTypeService;
 import qw.springframework.sfpetclinic.services.VetService;
-import qw.springframework.sfpetclinic.services.map.OwnerServiceMap;
-import qw.springframework.sfpetclinic.services.map.VetServiceMap;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
+    private final PetTypeService petTypeService;
 
     @Autowired
-    public DataInitializer(OwnerService ownerService, VetService vetService) {
+    public DataInitializer(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
+        this.petTypeService = petTypeService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+
+        PetType dog = new PetType("dog");
+        PetType savedDogPetType = petTypeService.save(dog);
+
+
+        PetType cat = new PetType("cat");
+        PetType savedCatPetType = petTypeService.save(cat);
+
         Owner owner1 = new Owner();
         owner1.setFirstName("Michael");
         owner1.setLastName("Weston");

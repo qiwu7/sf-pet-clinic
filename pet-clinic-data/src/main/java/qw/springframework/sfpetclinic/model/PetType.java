@@ -3,6 +3,10 @@ package qw.springframework.sfpetclinic.model;
 public class PetType extends BaseEntity {
     private String name;
 
+    public PetType(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
