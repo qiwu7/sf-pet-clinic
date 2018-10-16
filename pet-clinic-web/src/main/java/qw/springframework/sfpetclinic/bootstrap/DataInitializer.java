@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import qw.springframework.sfpetclinic.model.*;
-import qw.springframework.sfpetclinic.services.OwnerService;
-import qw.springframework.sfpetclinic.services.PetTypeService;
-import qw.springframework.sfpetclinic.services.SpecialtyService;
-import qw.springframework.sfpetclinic.services.VetService;
+import qw.springframework.sfpetclinic.services.*;
 
 import java.time.LocalDate;
 
@@ -17,13 +14,19 @@ public class DataInitializer implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialtyService specialtyService;
+    private final VisitService visitService;
 
     @Autowired
-    public DataInitializer(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService) {
+    public DataInitializer(OwnerService ownerService,
+                           VetService vetService,
+                           PetTypeService petTypeService,
+                           SpecialtyService specialtyService,
+                           VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -81,6 +84,13 @@ public class DataInitializer implements CommandLineRunner {
         owner2.getPets().add(fionasPet);
 
         ownerService.save(owner2);
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionasPet);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy Kitty");
+
+        visitService.save(catVisit);
 
         System.out.println("Loading owners");
 
