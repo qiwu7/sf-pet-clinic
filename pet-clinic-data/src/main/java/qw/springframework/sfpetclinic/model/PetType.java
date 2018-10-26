@@ -10,7 +10,6 @@ import javax.persistence.Table;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "types")
 public class PetType extends BaseEntity {
@@ -23,4 +22,9 @@ public class PetType extends BaseEntity {
         super(id);
         this.name = name;
     }
-}
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
+ }
